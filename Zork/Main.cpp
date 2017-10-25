@@ -7,6 +7,7 @@
 #include <istream>
 #include <fstream>
 #include <sstream>
+#include "Player.h"
 using namespace std;
 /*Inicio Zork*/
 /*Inicio listas luego tiene que pasar a Item*/
@@ -17,7 +18,7 @@ struct item
 	string itemName;
 	string actionItem;
 	int uses;
-	item *next;
+	//item *next2;
 };
 struct zone {
 	int number;
@@ -28,26 +29,31 @@ struct zone {
 
 void createZone(zone *&, int,string);
 void createItem(item *&, int, string, string,int);
+void showInventoryZone(zone *&);
+
+Player* player = nullptr;
+
 int main() {
 	zone *list = NULL;
 	item *mapinventory;
 	createZone(list, 1,"FIELD1");
 	createZone(list, 2,"FIELD2");
 	createZone(list, 3,"FIELD3");
-	createItem(mapinventory, 1, "Apple","Health",1);
-	createItem(mapinventory, 2, "Sword","Attack",3);
-	createItem(mapinventory, 2, "Key", "Open",1);
-	createItem(mapinventory, 3, "Heavy Sword", "Attack", 3);//Falta assignar puntos de vida
-	createItem(mapinventory, 3, "Melon","Health",1); //Falta assignar puntos de vida
+	//showInventoryZone(zone *list);
+	//createItem(mapinventory, 1, "Apple","Health",1);
+	//createItem(mapinventory, 2, "Sword","Attack",3);
+	//createItem(mapinventory, 2, "Key", "Open",1);
+	//createItem(mapinventory, 3, "Heavy Sword", "Attack", 3);//Falta assignar puntos de vida
+	//createItem(mapinventory, 3, "Melon","Health",1); //Falta assignar puntos de vida
 
 	
 	//nodos
-	system("pause>>null");
+	//system("pause>>null");
 	string input_command;
 	
 	vector<string> args;
-	cout << "Hi ZorkWorld! Please say something....\n";
-	
+	cout << "Hi ZorkWorld!....\n";
+	player->Look();
 	while (true) {
 		if (!kbhit() != 0) {
 
@@ -81,6 +87,9 @@ void createZone(zone *&list,int n,string z) {
 	else {
 		aux2->next = aux1;
 	}
+	//delete aux2;
+	//delete aux1;
+	//delete new_node;
 }
 
 void createItem(item *&list, int n, string itemName,string actionItem,int uses) {
@@ -94,21 +103,22 @@ void createItem(item *&list, int n, string itemName,string actionItem,int uses) 
 	item *aux2;
 	while ((aux1 != NULL) /*&& (aux1->zone < n)*/) {
 		aux2 = aux1;
-		aux1 = aux1->next;
+		//aux1 = aux1->next2;
 	}
 	if (list == aux1) {
 		list = new_item;
 	}
 	else {
-		aux2->next = aux1;
+		//aux2->next2 = aux1;
 	}
 }
-/*Mostrar Inventario*/
-void showInventoryZone(item *itemList) {
-	item *current = new item();
+/*Mostrar zonas*/
+void showInventoryZone(zone *itemList) {
+	zone *current = new zone();
 	current = itemList;
 	while (current != NULL) {
-		cout << "Your inventory is: Zone" << current->zone << " Object: " << current->itemName << " Action: " << current->actionItem << " Uses: " << current->uses;
+//		cout << "Your inventory is: Zone" << current->zone << " Object: " << current->itemName << " Action: " << current->actionItem << " Uses: " << current->uses;
+		cout << "Zones are: Zone" << current->number << " Object: " << current->type;
 	}
 
 }

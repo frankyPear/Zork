@@ -76,6 +76,7 @@
   <ItemGroup>
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
