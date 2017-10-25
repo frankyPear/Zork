@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include "Player.h"
+#include "MilitarGround.h"
 using namespace std;
 /*Inicio Zork*/
 /*Inicio listas luego tiene que pasar a Item*/
@@ -32,7 +33,7 @@ void createItem(item *&, int, string, string,int);
 void showInventoryZone(zone *&);
 
 Player* player = nullptr;
-
+MilitaryGround* ground = nullptr;
 int main() {
 	zone *list = NULL;
 	item *mapinventory;
@@ -54,6 +55,7 @@ int main() {
 	vector<string> args;
 	cout << "Hi ZorkWorld!....\n";
 	player->Look();
+	ground->GroundA();
 	while (true) {
 		if (!kbhit() != 0) {
 
@@ -67,7 +69,8 @@ int main() {
 			std::cout << "Bye";
 			return 0;
 		}
-		
+		ground->GroundG();
+		break;
 	}
 	return 0;
 }
