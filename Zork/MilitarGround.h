@@ -1,3 +1,16 @@
+
+enum groundType
+{
+	GROUNDA,
+	GROUNDB,
+	GROUNDC,
+	GROUNDD,
+	GROUNDE,
+	GROUNDF,
+	GROUNDG,
+	GROUNDH
+};
+
 class MilitaryGround {
 public:
 	MilitaryGround();
@@ -10,6 +23,8 @@ public:
 	void GroundF();
 	void GroundG();
 	void GroundH();
-	int mGround;
+	void SetmGround(int);
+	int GetmGround();
 private:
+	int mGround;
 }; 

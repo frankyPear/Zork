@@ -30,6 +30,12 @@ void Item::Drop()
 	cout << "You drop on the ground a charger for your Gun" << endl;
 	cout << "You drop on the ground a charger for your Uzi" << endl;
 }
+void Item::Attack()
+{
+}
+void Item::Die()
+{
+}
 void Item::Pick()
 {
 	cout << "You pick a small knife" << endl;

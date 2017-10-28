@@ -10,7 +10,17 @@ public:
 	void Go();
 	void Pick();
 	void Drop();
-	void Look();
+	void Look(int mGround);
+	void Init();
+
+	void Show();
+
+	int GetLifes() const;
+
+	void SetLifes(int lif);
+
+	int ModifyLifes(int lifesToModify, bool minus);
 
 private:
+	int lifes = 0;
 };

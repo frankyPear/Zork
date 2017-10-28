@@ -2,6 +2,16 @@
 
 using namespace std;
 
+enum itemType
+{
+	APPLE,
+	MEDICALKIT,
+	GUN,
+	UZI,
+	KEY,
+	BAG
+};
+
 class Item {
 public:
 	Item();
