@@ -23,8 +23,9 @@ public:
 	void GroundF();
 	void GroundG();
 	void GroundH();
+	int GetmGround() const;
 	void SetmGround(int);
-	int GetmGround();
+
 private:
 	int mGround;
 }; 

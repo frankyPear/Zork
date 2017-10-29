@@ -10,6 +10,10 @@ public:
 	World();
 	~World();
 
+	void worldInterpret(vector<string>& vectArgs);
+
 	void convertToVector(const string& sentence, vector<string>& vectArgs);
 
+private:
+	int zone = 0;
 };

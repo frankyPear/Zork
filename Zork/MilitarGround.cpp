@@ -22,15 +22,17 @@ void MilitaryGround::GroundB() {}
 /*Second-1A Ground - Coast*/
 void MilitaryGround::GroundC() {
 	/*Combat*/
-	player_public.ModifyLifes(25, true);
+	//player_public.ModifyLifes(25, true);
 }
 /*Second-1B Ground - Bunker*/
 void MilitaryGround::GroundD() {
 	/*Combat*/
-	player_public.ModifyLifes(25, true);
+	//player_public.ModifyLifes(25, true);
 }
 /*Second-2 Ground - Mountains*/
-void MilitaryGround::GroundE() {}
+void MilitaryGround::GroundE() {
+	player_public.ModifyLifes(5, true);
+}
 /*Second-3 Ground - Entrance Base*/
 void MilitaryGround::GroundF() {}
 /*Second-4 Ground - Gas Camera*/
@@ -50,19 +52,21 @@ void MilitaryGround::GroundG() {
 		}
 	} while ((number != numberPlayer) && (tries <20));
 	cout << "Congratulations you can access to the laboratory!";
+	GroundH();
 }
 /*Second-4 Ground - Last*/
 void MilitaryGround::GroundH() {
 	/*Combat*/
-	player_public.ModifyLifes(25, true);
+	player_public.Look(7);
+	//player_public.ModifyLifes(25, true);
 }
 
+/*gGets & Setters*/
+int MilitaryGround::GetmGround() const
+{
+	return mGround;
+}
 void MilitaryGround::SetmGround(int ground)
 {
-
-}
-
-int MilitaryGround::GetmGround()
-{
-	return groundType();
+	mGround = ground;
 }

@@ -10,26 +10,26 @@
 #include "Player.h"
 #include "MilitarGround.h"
 #include "World.h"
+#include "Item.h"
 using namespace std;
 /*Inicio Zork*/
 
-
 Player* player = nullptr;
+Item* it = nullptr;
 MilitaryGround* ground2 = nullptr;
 //Afegim World
 World world;
-
-
 
 int main() {
 
 	string input_command;
 	char key;
-//	ground.
+	int ending = 0;
 	vector<string> args;
-	cout << "Hi ZorkWorld!....\n";
-	player->Init();
-	//ground2->GroundA();
+	it->initZones();
+	player->Init();	
+	cout << endl;
+	cout << "-->";
 	while (true) {
 		if (!kbhit() != 0) {
 			key = _getch();
@@ -48,25 +48,25 @@ int main() {
 				cout << key;
 			}
 			else {
-				//convert
-				cout << input_command <<endl;
+				//convert.
+				cout << endl;
+				/*Instructions*/
 				world.convertToVector(input_command, args);
-			}
-			/**/
-
-			//getline(cin, input_command);
-			
+				world.worldInterpret(args);
+				cout << endl;
+			}		
 		}
 		if (args.size() > 0 && input_command == "quit") {
-			std::cout << "Bye! See you next time";
+			cout << "Bye! See you next time";
 			return 0;
 		}
-		//ground2->GroundG();
-		//break;
+		/*Reset Params*/
+		if (args.size()>0) { 
+			args.clear(); 
+			input_command = "";
+			cout << "-->";
+		}
+
 	}
 	return 0;
-}
-
-string readString() {
-	return "OK";
 }
