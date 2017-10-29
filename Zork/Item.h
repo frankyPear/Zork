@@ -27,6 +27,7 @@ public:
 		string actionItem, int uses, int life);
 	void showInventory();
 	void Drop(int zone, string invent);
+	bool searchKey();
 	bool searchList(item * listInventory, string itemInv);
 	void Use(string item);
 	void searchZone(int zone);

@@ -14,6 +14,7 @@ enum command1
 };
 Player* p = nullptr;
 Item i;
+Item* item;
 MilitaryGround ground;
 World::World()
 {
@@ -74,9 +75,15 @@ void World::worldInterpret(vector<string>& vectArgs) {
 						ground.SetmGround(ground.GetmGround() + 3);
 						p->Look(ground.GetmGround());
 						break;
-					case 3:
-						ground.SetmGround(ground.GetmGround() + 3);
-						p->Look(ground.GetmGround());
+					case 3:						
+						if(item->searchKey()){
+							cout << "You use the key and you can access to the military base!"<<endl;
+							ground.SetmGround(ground.GetmGround() + 3);
+							p->Look(ground.GetmGround());
+						}
+						else {
+							cout << "You need a key to acces..." << endl;
+						}
 						break;
 					default:
 						cout << endl;
@@ -127,55 +134,30 @@ void World::worldInterpret(vector<string>& vectArgs) {
 
 				/*USE COMMAND*/
 
-				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("MEDICALKIT") == 0) 
+				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("KEY"))
 				{
-					i.Use(vectArgs[1]);
-				}
-				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("KNIFE") == 0) 
-				{
-					
-				}
-				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("GUN") == 0) 
-				{
-					
-				}
-				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("SPRAY") == 0) {
-					i.Use(vectArgs[1]);
-				}
-				
+					if (item->searchKey()) {
+						cout << "You use the key and you can access to the military base!" << endl;
+						ground.SetmGround(ground.GetmGround() + 3);
+						p->Look(ground.GetmGround());
+					}
+					else {
+						cout << "You need a key to acces..." << endl;
+					}
+				}				
 				/*PICK COMMAND*/
-				if (vectArgs[0].compare("PICK") == 0 && vectArgs[1].compare("MEDICALKIT") == 0) {
-					i.Pick(ground.GetmGround(), "MEDICALKIT");
-				}
-				if (vectArgs[0].compare("PICK") == 0 && vectArgs[1].compare("KNIFE") == 0) {
-					i.Pick(ground.GetmGround(), "KNIFE");
-				}
-				if (vectArgs[0].compare("PICK") == 0 && vectArgs[1].compare("GUN") == 0) {
-					i.Pick(ground.GetmGround(), "GUN");
-				}
-				if (vectArgs[0].compare("PICK") == 0 && vectArgs[1].compare("SPRAY") == 0) {
-					i.Pick(ground.GetmGround(), "SPRAY");
-				}
-				if (vectArgs[0].compare("PICK") == 0 && vectArgs[1].compare("UZI") == 0) {
-					i.Pick(ground.GetmGround(), "UZI");
+				if (vectArgs[0].compare("PICK") == 0)
+				{
+					i.Pick(ground.GetmGround(), vectArgs[1]);
 				}
 				
 				/*DROP COMMAND*/
-				if (vectArgs[0].compare("DROP") == 0 && vectArgs[1].compare("MEDICALKIT") == 0) {
+				if (vectArgs[0].compare("DROP") == 0)
+				{
 					i.Drop(ground.GetmGround(),vectArgs[1]);
-				}
-				if (vectArgs[0].compare("DROP") == 0 && vectArgs[1].compare("APPLE") == 0) {
-					i.Drop(ground.GetmGround(), vectArgs[1]);
-				}
-				if (vectArgs[0].compare("DROP") == 0 && vectArgs[1].compare("GUN") == 0) {
-					i.Drop(ground.GetmGround(), vectArgs[1]);
-				}
-				if (vectArgs[0].compare("DROP") == 0 && vectArgs[1].compare("SPRAY") == 0) {
-					i.Drop(ground.GetmGround(), vectArgs[1]);
-				}
-				if (vectArgs[0].compare("DROP") == 0 && vectArgs[1].compare("UZI") == 0) {
-					i.Drop(ground.GetmGround(), vectArgs[1]);
-				}
+				} 
+
+
 
 				break;
 		default:

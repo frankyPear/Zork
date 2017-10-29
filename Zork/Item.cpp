@@ -5,11 +5,13 @@
 #include <string>
 #include <conio.h>
 #include "Player.h"
+#include "MilitarGround.h"
 using namespace std;
 /*Inicio listas*/
 item* listZone;
 item* listInventory;
 Player p;
+//MilitaryGround* ground;
 //void createZone(zone *&, int, string);
 void createItem(item *&, int, string, string, int);
 Item::Item()
@@ -88,7 +90,7 @@ void Item::deleteListInventory(item *list, int zone, string obj) {
 		item *lastItem = NULL;
 
 		aux_delete = list;
-		while ((aux_delete != NULL) && (aux_delete->zone != zone)) {
+		while ((aux_delete != NULL) && (aux_delete->zone != -1/*zone*/)) {
 			lastItem = aux_delete;
 			aux_delete = aux_delete->next;
 		}
@@ -96,7 +98,7 @@ void Item::deleteListInventory(item *list, int zone, string obj) {
 			cout << "Not Found!" << endl;
 		}
 		else if (lastItem == NULL) {
-			list->zone = -1;
+			list->zone = zone;
 			list = list->next;
 			//delete aux_delete;
 		}
@@ -174,10 +176,16 @@ bool Item::searchToPick(item *&listZone, item *&listInventory, int zone, string 
 bool Item::searchToDrop(item *&listZone, item *&listInventory, int zone, string obj) {
 	bool found = false;
 	item *current = listInventory;
-	while ((current != NULL) && current->zone <= zone) {
-		if (current->zone == zone) {
+	while ((current != NULL)){// && current->zone <= zone) {
+		if (current->zone == -1 && current->itemName==obj) {
 			found = true;
-			insertItemZone(listZone, zone, obj, current->uses, current->life);
+			//listZone->next;
+			listZone->zone = zone;
+			listZone->itemName = obj;
+			listZone->uses = listInventory->uses;
+			listZone->life = listInventory->life;
+			listZone->actionItem = listInventory->actionItem;
+			//insertItemZone(listZone, zone, obj, current->uses, current->life);
 			deleteListInventory(current, zone, obj);
 			break;
 		}
@@ -193,12 +201,12 @@ void Item::insertItemZone(item *list, int zone, string obj, int use, int lif) {
 		item *lastItem = NULL;
 
 		aux_modify = list;
-		while ((aux_modify != NULL) && (aux_modify->zone != zone)) {
+		while ((aux_modify != NULL) && (aux_modify->zone != /*zone*/-1)) {
 			lastItem = aux_modify;
 			aux_modify = aux_modify->next;
 		}
 		if (aux_modify == NULL) {
-			cout << "Not Found!" << endl;
+			cout << "Not Found in your inventory!" << endl;
 		}
 		else if (lastItem == NULL) {
 			list->zone = zone;
@@ -208,6 +216,7 @@ void Item::insertItemZone(item *list, int zone, string obj, int use, int lif) {
 			//delete aux_modify;
 		}
 		else {
+			aux_modify->zone = zone;
 			lastItem->zone = zone;
 			list->zone = zone;
 			list->uses = use;
@@ -236,7 +245,7 @@ void Item::searchZone(int zone) {
 /*Inventory - Player*/
 void Item::insertInventory(item *&listInventory, int n, string itemName, string actionItem, int uses, int life) {
 	item *newItem = new item();
-	newItem->zone = n;
+	newItem->zone = -1;
 	newItem->itemName = itemName;
 	newItem->actionItem = actionItem;
 	newItem->uses = uses;
@@ -263,7 +272,9 @@ void Item::showInventory(/*item *list*/)
 	invent = listInventory;
 	while (invent != NULL) {
 		//if (invent->zone /*!=*/< 0)
-		if (invent->zone != -1) {
+		if (invent->zone != -1) {}
+		else
+		{
 			found = true;
 			cout << "Inventory: " << invent->itemName << " -> Remaining uses: " << invent->uses << endl;
 		}
@@ -287,6 +298,9 @@ void Item::Drop(int zone, string invent)
 		cout << "You can't drop an item that you don't have..." << endl;
 	}
 }
+bool Item::searchKey() {
+	return searchToDrop(listZone, listInventory, 0, "KEY");
+}
 bool Item::searchList(item *listInventory, string itemInv) {
 	bool found = false;
 
@@ -307,17 +321,14 @@ void Item::Use(string item)
 	if (searchList(listInventory, item)) {
 		if (item.compare("MEDICALKIT")==0) p.ModifyLifes(listInventory->life, false);
 		if (item.compare("SPRAY") == 0) p.ModifyLifes(listInventory->life, false);
-		
+		if (item.compare("KEY") == 0) {
+//			if(ground.mGround && searchToDrop(listZone, listInventory, 0, "KEY")){
+//				mG.SetOpen(true);
+//				//p.Look(3);
+//			}
+		}
 	}
 	else {
 		cout << "You don't have this Item." << endl;
 	}
-//	int uses = 0;
-//	char Item[20];
-//	if (uses < 0) {
-//		cout << "You can't use this Item." << endl;
-//	}
-//	else {
-//		cout << "You use this Item." << endl;
-//	}
 }

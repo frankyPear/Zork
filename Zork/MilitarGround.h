@@ -25,7 +25,9 @@ public:
 	void GroundH();
 	int GetmGround() const;
 	void SetmGround(int);
-
+	bool GetOpen();
+	void SetOpen(bool);
 private:
 	int mGround;
+	bool open;
 }; 

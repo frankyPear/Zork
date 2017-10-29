@@ -62,10 +62,8 @@ void Player::Look(int mGround)
 	break;
 	case 3:
 		//Death Point
-		cout << "In your position there is a wall with a small door." << endl;
-		cout << "It's seems closed. You need the key to access in the military base." << endl;
-		cout << "There are to ways: One in the north around the lake." << endl;
-		cout << "Or if you open the huge door you can access to military base by east." << endl;
+		cout << "In your position there are to ways: One in the north around the lake." << endl;
+		cout << "Or if you trespassing the door the huge door you can access to military base by east." << endl;
 		it2->searchZone(mGround);
 		ground->GroundD();
 		break;
@@ -106,8 +104,9 @@ void Player::Look(int mGround)
 		cout << "You exit to the military base and one chopper is waiting for you." << endl;
 		cout << "Thanks for playing!!!!!" << endl;
 		cout << "GAME OVER! See you next time" << endl;
-		system("pause");	break;
+		system("pause");	
 		exit(0);
+		break;
 	}
 }
 void Player::Init()
@@ -136,6 +135,12 @@ int Player::ModifyLifes(int lifesToModify, bool minus)
 		lif += lifesToModify;
 		cout << "You earn " << lifesToModify << " life points.\n " << "Your life is about " << lif << "points." << endl;
 	}
+	if (lif <= 0) {
+		cout << "GAME OVER! You are dead. Thanks for playing." << endl;
+		system("pause");
+		exit(0);
+	}
+
 	SetLifes(lif);
 	return lif;
 }
