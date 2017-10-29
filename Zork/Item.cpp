@@ -27,7 +27,7 @@ void Item::initZones()
 	item *initialList = new item();
 	insertList(initialList, 0, "MEDICALKIT", "HEALTH", 1, 5);
 	insertList(initialList, 1, "KNIFE", "ATTACK", 1, 10);
-	insertList(initialList, 2, "GUN", "ATTACK", 3, 15);
+	insertList(initialList, 2, "GUN", "ATTACK", 1, 15);
 	insertList(initialList, 3, "SPRAY", "HEALTH", 1, 15);
 	insertList(initialList, 5, "UZI", "ATTACK", 1, 25);
 	insertList(initialList, 5, "KEY", "USE", 1, 1);
