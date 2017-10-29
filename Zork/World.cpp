@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "MilitarGround.h"
+#include "Soldier.h"
 #include <iostream>
 
 enum command1
@@ -13,11 +14,14 @@ enum command1
 	LOOK
 };
 Player* p = nullptr;
+//Soldier* s = nullptr;
+Soldier *s_public = new Soldier();
 Item i;
 Item* item;
 MilitaryGround ground;
 World::World()
 {
+
 }
 
 World::~World()
@@ -72,8 +76,16 @@ void World::worldInterpret(vector<string>& vectArgs) {
 						p->Look(ground.GetmGround());
 						break;
 					case 2:
-						ground.SetmGround(ground.GetmGround() + 3);
-						p->Look(ground.GetmGround());
+						if(s_public->Die()){
+							ground.SetmGround(ground.GetmGround() + 3);
+							p->Look(ground.GetmGround());
+						}
+						else {
+							cout << "Another enemy detects you...He shoots you while you're trying to escape" << endl;
+							ground.GroundC();//(10, true);//Attack();
+							ground.SetmGround(ground.GetmGround() + 3);
+							p->Look(ground.GetmGround());
+						}
 						break;
 					case 3:						
 						if(item->searchKey()){
@@ -101,6 +113,14 @@ void World::worldInterpret(vector<string>& vectArgs) {
 					break;
 					case 1:
 						ground.SetmGround(ground.GetmGround() + 1);
+						if (s_public->Die()) {
+							cout << "The Soldier is dead. You can acces to the bunker to the east" << endl;
+							cout << "Or go north to look if you can access to the base." << endl;
+						}
+						else {
+							cout << "You see the sea and one soldier but he doesn't know your presence." << endl;
+							cout << "The soldier is in the middle of bunker place." << endl;
+						}
 						p->Look(ground.GetmGround());
 					break;
 					case 4:
@@ -134,7 +154,7 @@ void World::worldInterpret(vector<string>& vectArgs) {
 
 				/*USE COMMAND*/
 
-				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("KEY"))
+				if (vectArgs[0].compare("USE") == 0 && vectArgs[1].compare("KEY")==0)
 				{
 					if (item->searchKey()) {
 						cout << "You use the key and you can access to the military base!" << endl;
@@ -145,6 +165,24 @@ void World::worldInterpret(vector<string>& vectArgs) {
 						cout << "You need a key to acces..." << endl;
 					}
 				}				
+				if (vectArgs[0].compare("USE") == 0 && ((vectArgs[1].compare("GUN")) ==0 || (vectArgs[1].compare("KNIFE")) ==0 || (vectArgs[1].compare("UZI")) == 0))
+				{
+					if (item->searchWeapon(vectArgs[1])) {
+						cout << "You use the "<<vectArgs[1]<< " Good Luck!" << endl;
+						ground.GroundC2();
+						//s->ModifyLifes(10,true);
+					}
+					else {
+						cout << "You are attacked by the soldier..." << endl;
+						ground.GroundC();
+						//p->ModifyLifes(10, true);
+					}
+				}
+				if (vectArgs[0].compare("USE") == 0 && (vectArgs[1].compare("MEDICALKIT") == 0 || vectArgs[1].compare("SPRAY") == 0))
+				{
+					item->Use(vectArgs[1]); 
+				}
+
 				/*PICK COMMAND*/
 				if (vectArgs[0].compare("PICK") == 0)
 				{

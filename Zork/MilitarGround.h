@@ -18,6 +18,7 @@ public:
 	void GroundA();
 	void GroundB();
 	void GroundC();
+	void GroundC2();
 	void GroundD();
 	void GroundE();
 	void GroundF();

@@ -28,6 +28,7 @@ public:
 	void showInventory();
 	void Drop(int zone, string invent);
 	bool searchKey();
+	bool searchWeapon(string obj);
 	bool searchList(item * listInventory, string itemInv);
 	void Use(string item);
 	void searchZone(int zone);

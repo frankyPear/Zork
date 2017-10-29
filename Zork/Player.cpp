@@ -55,10 +55,8 @@ void Player::Look(int mGround)
 	break;
 	case 2:
 		//Second-1 (Coast) place
-		cout << "You see the sea and one soldier but he doesn't know your presence." << endl;
-		cout << "The soldier is in the middle of bunker place." << endl;
 		it2->searchZone(mGround);
-		ground->GroundC();
+		//ground->GroundC();
 	break;
 	case 3:
 		//Death Point
@@ -129,7 +127,7 @@ int Player::ModifyLifes(int lifesToModify, bool minus)
 	int lif = lifes;
 	if (minus) {
 		lif -= lifesToModify;
-		cout << "You lost " << lifesToModify << " life points.\n "<<"Your life is about " << lif << "points." << endl;
+		cout << "You loose " << lifesToModify << " life points.\n "<<"Your life is about " << lif << "points." << endl;
 	}
 	else {
 		lif += lifesToModify;

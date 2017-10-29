@@ -8,9 +8,12 @@
 #include <time.h>
 using namespace std;
 Player player_public;
+Soldier *s_public2 = new Soldier();
 MilitaryGround gr;
 MilitaryGround::MilitaryGround()
 {
+	//s_public->lifeEnemy = 25;
+	//s_public->SetLifes(25);// .SetLifes(25);
 }
 MilitaryGround::~MilitaryGround()
 {
@@ -23,7 +26,11 @@ void MilitaryGround::GroundB() {}
 /*Second-1A Ground - Coast*/
 void MilitaryGround::GroundC() {
 	/*Combat*/
-	//player_public.ModifyLifes(25, true);
+	player_public.ModifyLifes(12, true);
+}
+void MilitaryGround::GroundC2() {
+	//s_public->SetLifes(25);// .SetLifes(25);
+	s_public2->ModifyEnemyLifes(10, true);
 }
 /*Second-1B Ground - Bunker*/
 void MilitaryGround::GroundD() {
